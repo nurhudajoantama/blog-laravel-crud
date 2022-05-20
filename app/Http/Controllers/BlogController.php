@@ -10,7 +10,7 @@ class BlogController extends Controller
 {
     function index()
     {
-        $blogs = Blog::paginate(20);
+        $blogs = Blog::orderBy('updated_at', 'desc')->paginate(20);
         return view('blog.index', compact('blogs'));
     }
 
@@ -33,7 +33,6 @@ class BlogController extends Controller
             'body' => 'required',
         ]);
         $request->merge(['slug' => Str::slug($request->slug)]);
-        dd($request->all());
         Blog::create($request->all());
         return redirect()->route('blog.index');
     }
