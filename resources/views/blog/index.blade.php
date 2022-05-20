@@ -33,12 +33,14 @@
         <tr>
             <th scope="row">1</th>
             <td>
-                <a href="{{url('blog', $blog->slug)}}" class="blog-title">
+                <a href="{{route('blog.show', ['slug' => $blog->slug])}}" class="blog-title">
                     {{$blog->title}}
                 </a>
             </td>
             <td>
-                <button type="button" class="btn btn-success btn-sm">Edit</button>
+                <a href="{{route('blog.edit', ['slug' => $blog->slug])}}">
+                    <button type="button" class="btn btn-success btn-sm">Edit</button>
+                </a>
                 <button type="button" class="btn btn-danger btn-sm">Delete</button>
             </td>
         </tr>

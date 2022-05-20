@@ -28,7 +28,7 @@ class BlogController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'slug' => 'required',
+            'slug' => 'required|unique:blogs',
             'body' => 'required',
         ]);
 
@@ -47,11 +47,12 @@ class BlogController extends Controller
     {
         $request->validate([
             'title' => 'required|min:3',
-            'slug' => 'required|min:3',
+            // 'slug' => 'required|min:3',
             'body' => 'required|min:3',
         ]);
+        $data = $request->except(['_token', '_method', 'slug']);
 
-        Blog::where('slug', $slug)->update($request->all());
+        Blog::where('slug', $slug)->update($data);
 
         return redirect()->route('blog.edit', [
             'slug' => $slug
