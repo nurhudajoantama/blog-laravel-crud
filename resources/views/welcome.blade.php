@@ -6,7 +6,7 @@
 <h1 class="mb-5">Blog Post</h1>
 
 <div class="row">
-    @foreach ($blogs as $blog)
+    @forelse ($blogs as $blog)
     <div class="col-md-4">
         <div class="card mb-3">
             <div class="card-body">
@@ -19,8 +19,13 @@
             </div>
         </div>
     </div>
-
-    @endforeach
+    @empty
+    <div>
+        <h3 class="text-center">No Blog Post</h3>
+    </div>
+    @endforelse
 </div>
+
+{{ $blogs->links() }}
 
 @endsection

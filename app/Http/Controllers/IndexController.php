@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(20);
         return view('welcome', compact('blogs'));
     }
 }

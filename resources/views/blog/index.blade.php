@@ -29,7 +29,7 @@
     </thead>
 
     <tbody>
-        @foreach ($blogs as $blog)
+        @forelse ($blogs as $blog)
         <tr>
             <td>
                 {{$blog->title}}
@@ -76,9 +76,15 @@
                 </div>
             </td>
         </tr>
-        @endforeach
+        @empty
+        <div>
+            <h3 class="text-center">No Blog Post</h3>
+        </div>
+        @endforelse
     </tbody>
 </table>
+
+{{ $blogs->links() }}
 
 
 @endsection
