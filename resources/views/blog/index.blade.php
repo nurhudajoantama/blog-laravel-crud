@@ -33,7 +33,7 @@
         <tr>
             <th scope="row">1</th>
             <td>
-                <a href="{{url($blog->slug)}}" class="blog-title">
+                <a href="{{url('blog', $blog->slug)}}" class="blog-title">
                     {{$blog->title}}
                 </a>
             </td>
