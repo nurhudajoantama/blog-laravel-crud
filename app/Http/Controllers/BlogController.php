@@ -9,7 +9,8 @@ class BlogController extends Controller
 {
     function index()
     {
-        return view('blog.index');
+        $blogs = Blog::all();
+        return view('blog.index', compact('blogs'));
     }
 
     function show($slug)
