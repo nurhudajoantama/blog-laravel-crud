@@ -22,7 +22,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">No</th>
             <th scope="col">Title</th>
             <th scope="col">Slug</th>
             <th scope="col">Action</th>
@@ -32,11 +31,8 @@
     <tbody>
         @foreach ($blogs as $blog)
         <tr>
-            <th scope="row">1</th>
             <td>
-
                 {{$blog->title}}
-
             </td>
             <td>
                 <a href="{{route('blog.show', ['slug' => $blog->slug])}}" class="blog-title">
