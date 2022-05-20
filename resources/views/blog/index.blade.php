@@ -24,17 +24,23 @@
         <tr>
             <th scope="col">No</th>
             <th scope="col">Title</th>
+            <th scope="col">Slug</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
 
-    @foreach ($blogs as $blog)
     <tbody>
+        @foreach ($blogs as $blog)
         <tr>
             <th scope="row">1</th>
             <td>
+
+                {{$blog->title}}
+
+            </td>
+            <td>
                 <a href="{{route('blog.show', ['slug' => $blog->slug])}}" class="blog-title">
-                    {{$blog->title}}
+                    {{$blog->slug}}
                 </a>
             </td>
             <td>
@@ -74,8 +80,8 @@
                 </div>
             </td>
         </tr>
+        @endforeach
     </tbody>
-    @endforeach
 </table>
 
 
