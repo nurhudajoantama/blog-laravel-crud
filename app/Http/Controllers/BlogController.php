@@ -27,9 +27,9 @@ class BlogController extends Controller
     function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|min:3',
-            'slug' => 'required|min:3',
-            'body' => 'required|min:3',
+            'title' => 'required',
+            'slug' => 'required',
+            'body' => 'required',
         ]);
 
         Blog::create($request->all());

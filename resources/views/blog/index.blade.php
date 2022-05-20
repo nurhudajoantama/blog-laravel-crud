@@ -15,6 +15,10 @@
 
 <h1 class="mb-5">Blog Post</h1>
 
+<div class="mb-3">
+    <a href="{{route('blog.create')}}" class="btn btn-primary">Create</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
