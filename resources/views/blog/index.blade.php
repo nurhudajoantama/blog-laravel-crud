@@ -41,7 +41,37 @@
                 <a href="{{route('blog.edit', ['slug' => $blog->slug])}}">
                     <button type="button" class="btn btn-success btn-sm">Edit</button>
                 </a>
-                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#delete{{$blog->slug}}Modal">
+                    Delete
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="delete{{$blog->slug}}Modal" tabindex="-1"
+                    aria-labelledby="delete{{$blog->slug}}Modal" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="delete{{$blog->slug}}Modal">Are You Sure Want To Delete ?
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure want to delete blog with title <strong>{{$blog->title}}</strong> ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
+                                <form action="{{route('blog.destroy', ['slug' => $blog->slug])}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">Yes! Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </td>
         </tr>
     </tbody>
