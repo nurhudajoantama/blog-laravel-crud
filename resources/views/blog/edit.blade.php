@@ -23,6 +23,16 @@
         <label for="body">Body</label>
         <textarea class="form-control" id="body" name="body" rows="5">{{$blog->body}}</textarea>
     </div>
+    <div class="mb-4">
+        <div>
+            dibuat pada
+            <strong>{{$blog->created_at->format('d M Y')}}</strong>
+        </div>
+        <div>
+            terakhir diperbarui pada
+            <strong>{{$blog->updated_at->format('d M Y')}}</strong>
+        </div>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
