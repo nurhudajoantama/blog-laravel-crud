@@ -24,6 +24,8 @@
         <tr>
             <th scope="col">Title</th>
             <th scope="col">Slug</th>
+            <th scope="col">Updated At</th>
+            <th scope="col">Created At</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -38,6 +40,12 @@
                 <a href="{{route('blog.show', ['slug' => $blog->slug])}}" class="blog-title">
                     {{$blog->slug}}
                 </a>
+            </td>
+            <td>
+                {{$blog->created_at}}
+            </td>
+            <td>
+                {{$blog->updated_at}}
             </td>
             <td>
                 <a href="{{route('blog.edit', ['slug' => $blog->slug])}}" class="btn btn-success btn-sm">
