@@ -40,8 +40,8 @@
                 </a>
             </td>
             <td>
-                <a href="{{route('blog.edit', ['slug' => $blog->slug])}}">
-                    <button type="button" class="btn btn-success btn-sm">Edit</button>
+                <a href="{{route('blog.edit', ['slug' => $blog->slug])}}" class="btn btn-success btn-sm">
+                    Edit
                 </a>
 
                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
