@@ -6,13 +6,23 @@
 
 <h1 class="mb-5">Create Blog</h1>
 
+@if ($message = Session::get('success'))
+<div class="alert alert-success alert-block" role="alert">
+    {{ $message }}
+</div>
+@endif
+
 <form action="{{route('blog.update', ['slug' => $blog->slug])}}" method="POST">
     @csrf
     @method('put')
 
     <div class="form-group mb-3">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="{{$blog->title}}">
+        <input type="text" class="form-control  @error('title') is-invalid @enderror" id="title" name="title"
+            placeholder="Title" value="{{old('title', $blog->title)}}">
+        @error('title')
+        <div class="invalid-feedback">{{$message}}</div>
+        @enderror
     </div>
     <div class="form-group mb-3">
         <label for="slug">Slug</label>
@@ -21,7 +31,11 @@
     </div>
     <div class="form-group mb-3">
         <label for="body">Body</label>
-        <textarea class="form-control" id="body" name="body" rows="5">{{$blog->body}}</textarea>
+        <textarea class="form-control @error('body') is-invalid @enderror" id="body" name="body" rows="5">{{old('body',
+            $blog->body)}}</textarea>
+        @error('body')
+        <div class="invalid-feedback">{{$message}}</div>
+        @enderror
     </div>
     <div class="mb-4">
         <div>
