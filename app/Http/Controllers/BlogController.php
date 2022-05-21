@@ -27,12 +27,12 @@ class BlogController extends Controller
 
     function store(Request $request)
     {
+        $request->merge(['slug' => Str::slug($request->slug)]);
         $request->validate([
             'title' => 'required|min:3',
             'slug' => 'required|unique:blogs|min:3',
             'body' => 'required|min:3',
         ]);
-        $request->merge(['slug' => Str::slug($request->slug)]);
         Blog::create($request->all());
         return redirect()->route('blog.index');
     }
