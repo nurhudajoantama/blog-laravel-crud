@@ -4,6 +4,12 @@
 
 @section('content')
 
+<div class="mb-3">
+    <a href="{{route('dashboard.index')}}">
+        <h3>Dashboard</h3>
+    </a>
+</div>
+
 <h1 class="mb-5">Create Blog</h1>
 
 <form action="{{route('dashboard.blog.store')}}" method="POST">

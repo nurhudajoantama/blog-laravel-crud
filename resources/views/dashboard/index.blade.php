@@ -1,15 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
-</head>
+@section('title', 'Blog Dashboard')
 
-<body>
-    test
-</body>
+@section('content')
+<div class="mb-3">
+    <a href="{{route('dashboard.index')}}">
+        <h3>Dashboard</h3>
+    </a>
+</div>
 
-</html>
+<div class="row mt-5">
+    <div class="col-md-6">
+        <a href="{{route('dashboard.blog.index')}}" style="text-decoration:none;">
+            <div class="card text-bg-primary mb-3">
+                <div class="card-body">
+                    <h1 class="card-title">Blog List</h1>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a href="{{route('dashboard.blog.create')}}" style="text-decoration:none;">
+            <div class="card text-bg-success mb-3">
+                <div class="card-body">
+                    <h1 class="card-title">Create</h1>
+                </div>
+            </div>
+        </a>
+    </div>
+    @endsection
