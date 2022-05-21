@@ -12,6 +12,9 @@ class BlogController extends Controller
         $search = $request->get('search');
         $blogs = Blog::with('user')
             ->where('title', 'like', '%' . $search . '%')
+            ->orWhereHas('user', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(20)
             ->appends($request->query());

@@ -13,10 +13,13 @@
 </div>
 
 <div>
-    <span>
+    <p>
+        Dibuat oleh <strong>{{$blog->user->name}}</strong>
+    </p>
+    <p>
         Terakhir diperbarui pada
         <strong>{{$blog->updated_at->format('d M Y')}}</strong>
-    </span>
+    </p>
 </div>
 
 <div class="mt-5">
