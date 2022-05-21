@@ -20,7 +20,7 @@ class AuthController extends Controller
         ]);
 
         if (auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.index');
         }
 
         return redirect()->back()->with('error', 'Email or password is incorrect');

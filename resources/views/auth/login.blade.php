@@ -32,9 +32,9 @@
         <div class="invalid-feedback">{{$message}}</div>
         @enderror
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
     <div class="mt-2">
-        <span>Already have an account? <a href="{{route('login')}}">Login</a></span>
+        <span>Don't have an account? <a href="{{route('register')}}">Register</a></span>
     </div>
 </form>
 @endsection

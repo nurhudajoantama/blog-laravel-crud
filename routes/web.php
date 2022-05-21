@@ -18,10 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'postRegister'])->name('register.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::prefix('/dashboard')->middleware('auth')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('dashboard.index');
+});
 
 Route::prefix('/blog')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('blog.index');
