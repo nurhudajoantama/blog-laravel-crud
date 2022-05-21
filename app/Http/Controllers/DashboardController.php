@@ -12,9 +12,13 @@ class DashboardController extends Controller
         return view('dashboard.index');
     }
 
-    public function indexBlog()
+    public function indexBlog(Request $request)
     {
-        $blogs = Blog::orderBy('updated_at', 'desc')->paginate(20);
+        $search = $request->get('search');
+        $blogs = Blog::where('title', 'like', '%' . $search . '%')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(20)
+            ->appends($request->query());
         return view('dashboard.blog.index', compact('blogs'));
     }
 

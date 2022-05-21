@@ -25,6 +25,15 @@
     <a href="{{route('dashboard.blog.create')}}" class="btn btn-primary">Create</a>
 </div>
 
+<div>
+    <form action="" method="GET">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" name="search" value="{{request()->search}}">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+
 <table class="table">
     <thead>
         <tr>
