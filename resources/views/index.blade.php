@@ -7,7 +7,7 @@
 
 <div class="row">
     @forelse ($blogs as $blog)
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{$blog->title}}</h5>
@@ -25,7 +25,5 @@
     </div>
     @endforelse
 </div>
-
-{{ $blogs->links() }}
 
 @endsection
