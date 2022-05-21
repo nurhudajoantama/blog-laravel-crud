@@ -1,98 +1,31 @@
 @extends('layouts.master')
 
-@section('title', 'Blog Dashboard')
+@section('title', 'Blog')
 
 @section('content')
-<style>
-    .blog-title {
-        text-decoration: none;
-    }
-
-    .blog-title:hover {
-        text-decoration: underline;
-    }
-</style>
-
 <h1 class="mb-5">Blog Post</h1>
 
-<div class="mb-3">
-    <a href="{{route('blog.create')}}" class="btn btn-primary">Create</a>
+<div class="row">
+    @forelse ($blogs as $blog)
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{$blog->title}}</h5>
+                <p class="card-text">{{Str::limit($blog->body, 35)}}...</p>
+                <a href="{{route('blog.show', ['slug' => $blog->slug])}}" class="btn btn-primary">Read More</a>
+            </div>
+            <div class="card-footer text-muted">
+                {{$blog->created_at->format('d M Y')}}
+            </div>
+        </div>
+    </div>
+    @empty
+    <div>
+        <h3 class="text-center">No Blog Post</h3>
+    </div>
+    @endforelse
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Slug</th>
-            <th scope="col">Updated At</th>
-            <th scope="col">Created At</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @forelse ($blogs as $blog)
-        <tr>
-            <td>
-                {{$blog->title}}
-            </td>
-            <td>
-                <a href="{{route('blog.show', ['slug' => $blog->slug])}}" class="blog-title">
-                    {{$blog->slug}}
-                </a>
-            </td>
-            <td>
-                {{$blog->created_at}}
-            </td>
-            <td>
-                {{$blog->updated_at}}
-            </td>
-            <td>
-                <a href="{{route('blog.edit', ['slug' => $blog->slug])}}" class="btn btn-success btn-sm">
-                    Edit
-                </a>
-
-                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#delete{{$blog->slug}}Modal">
-                    Delete
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="delete{{$blog->slug}}Modal" tabindex="-1"
-                    aria-labelledby="delete{{$blog->slug}}Modal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="delete{{$blog->slug}}Modal">Are You Sure Want To Delete ?
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure want to delete blog with title <strong>{{$blog->title}}</strong> ?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('blog.destroy', ['slug' => $blog->slug])}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger">Yes! Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        @empty
-        <div>
-            <h3 class="text-center">No Blog Post</h3>
-        </div>
-        @endforelse
-    </tbody>
-</table>
-
 {{ $blogs->links() }}
-
 
 @endsection
