@@ -6,10 +6,16 @@
 <form action="{{route('login.post')}}" method="POST">
     @csrf
 
+    @if ($message = Session::get('error'))
+    <div class="alert alert-danger alert-block" role="alert">
+        {{ $message }}
+    </div>
+    @endif
+
     <a href="{{route('index')}}" class="blog-link">
         <h1 class="h3 mb-3 fw-normal">Blog CRUD</h1>
     </a>
-    <h1 class="h3 mb-3 fw-normal">Register</h1>
+    <h1 class="h3 mb-3 fw-normal">Login</h1>
     <div class="form-floating">
         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="floatingInput"
             placeholder="name@example.com" value="{{old('email')}}">
