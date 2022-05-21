@@ -37,6 +37,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
         ]);
         $request->merge(['password' => bcrypt($request->password)]);
         User::create($request->all());
