@@ -10,7 +10,8 @@ class BlogController extends Controller
     function index(Request $request)
     {
         $search = $request->get('search');
-        $blogs = Blog::where('title', 'like', '%' . $search . '%')
+        $blogs = Blog::with('user')
+            ->where('title', 'like', '%' . $search . '%')
             ->orderBy('created_at', 'desc')
             ->paginate(20)
             ->appends($request->query());

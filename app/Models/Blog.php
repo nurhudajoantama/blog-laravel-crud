@@ -13,5 +13,11 @@ class Blog extends Model
         'title',
         'slug',
         'body',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

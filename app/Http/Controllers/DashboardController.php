@@ -16,6 +16,7 @@ class DashboardController extends Controller
     {
         $search = $request->get('search');
         $blogs = Blog::where('title', 'like', '%' . $search . '%')
+            ->where('user_id', auth()->user()->id)
             ->orderBy('updated_at', 'desc')
             ->paginate(20)
             ->appends($request->query());
@@ -35,12 +36,13 @@ class DashboardController extends Controller
 
     public function storeBlog(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'title' => 'required|min:3',
             'slug' => 'required|unique:blogs|min:3',
             'body' => 'required|min:3',
         ]);
-        Blog::create($request->all());
+        $data['user_id'] = auth()->id();
+        Blog::create($data);
         return redirect()->route('dashboard.blog.index');
     }
 

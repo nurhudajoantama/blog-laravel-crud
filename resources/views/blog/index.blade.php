@@ -25,7 +25,7 @@
                 <a href="{{route('blog.show', ['slug' => $blog->slug])}}" class="btn btn-primary">Read More</a>
             </div>
             <div class="card-footer text-muted">
-                {{$blog->created_at->format('d M Y')}}
+                Dibuat oleh {{$blog->user->name}} pada {{$blog->created_at->format('d M Y')}}
             </div>
         </div>
     </div>
