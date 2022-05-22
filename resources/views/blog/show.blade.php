@@ -24,7 +24,7 @@
 </div>
 
 <div class="mt-5">
-    <p>{{$blog->body}}</p>
+    {!!$blog->body!!}
 </div>
 
 @endsection
