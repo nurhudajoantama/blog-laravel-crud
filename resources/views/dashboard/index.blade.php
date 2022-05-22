@@ -1,14 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('title', 'Blog Dashboard')
 
-@section('content')
-<div class="mb-3">
-    <a href="{{route('dashboard.index')}}">
-        <h3>Dashboard</h3>
-    </a>
-</div>
-
+@section('dashboard')
 <div class="row mt-5">
     <div class="col-md-6">
         <a href="{{route('dashboard.blog.index')}}" style="text-decoration:none;">

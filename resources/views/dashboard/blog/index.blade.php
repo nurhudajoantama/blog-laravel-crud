@@ -1,8 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('title', 'Blog Dashboard')
 
-@section('content')
+@section('dashboard')
 <style>
     .blog-title {
         text-decoration: none;
@@ -12,13 +12,6 @@
         text-decoration: underline;
     }
 </style>
-
-<div class="mb-3">
-    <a href="{{route('dashboard.index')}}">
-        <h3>Dashboard</h3>
-    </a>
-</div>
-
 <h1 class="mb-5">Blog Post</h1>
 
 <div class="mb-3">

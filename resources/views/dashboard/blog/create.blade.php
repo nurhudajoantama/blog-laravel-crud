@@ -1,15 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('title', 'Create Blog')
 
-@section('content')
-
-<div class="mb-3">
-    <a href="{{route('dashboard.index')}}">
-        <h3>Dashboard</h3>
-    </a>
-</div>
-
+@section('dashboard')
 <h1 class="mb-5">Create Blog</h1>
 
 <form action="{{route('dashboard.blog.store')}}" method="POST">
