@@ -7,7 +7,6 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +19,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
+// index route 
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
+// auth route
 Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'postLogin'])->name('login.post');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -44,24 +45,23 @@ Route::middleware('auth')->group(function () {
 
     // Settings Route
     Route::prefix('/settings')->group(function () {
-        // Route::get('/', [DashboardController::class, 'indexSettings'])->name('settings.index');
-        Route::get('/user', [SettingController::class, 'userSetting'])->name('settings.user');
-        Route::post('/user', [SettingController::class, 'userSettingPost'])->name('settings.user.post');
-        Route::get('/user/change-password', [SettingController::class, 'userChangePassword'])->name('settings.user.change-password');
-        Route::post('/user/change-password', [SettingController::class, 'userChangePasswordPost'])->name('settings.user.change-password.post');
+        Route::get('/', [DashboardController::class, 'indexSettings'])->name('settings.index');
+        Route::prefix('/user')->group(function () {
+            Route::get('/', [SettingController::class, 'userSetting'])->name('settings.user');
+            Route::post('/', [SettingController::class, 'userSettingPost'])->name('settings.user.post');
+            Route::get('/change-password', [SettingController::class, 'userChangePassword'])->name('settings.user.change-password');
+            Route::post('/change-password', [SettingController::class, 'userChangePasswordPost'])->name('settings.user.change-password.post');
+        });
     });
 });
 
+// user route
 Route::prefix('/user')->group(function () {
     Route::get('/{user:username}', [UserController::class, 'show'])->name('user.show');
 });
 
+// blog route
 Route::prefix('/blog')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('blog.index');
-    // Route::get('/create', [BlogController::class, 'create'])->name('blog.create');
-    // Route::get('/{slug}/edit', [BlogController::class, 'edit'])->name('blog.edit');
     Route::get('/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
-    // Route::post('/', [BlogController::class, 'store'])->name('blog.store');
-    // Route::put('/{slug}', [BlogController::class, 'update'])->name('blog.update');
-    // Route::delete('/{slug}', [BlogController::class, 'destroy'])->name('blog.destroy');
 });
