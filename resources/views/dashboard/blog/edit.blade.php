@@ -11,7 +11,7 @@
 </div>
 @endif
 
-<form action="{{route('dashboard.blog.update', ['blog' => $blog->slug])}}" method="POST">
+<form action="{{route('dashboard.blog.update', ['blog' => $blog->slug])}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('put')
 
@@ -23,11 +23,27 @@
         <div class="invalid-feedback">{{$message}}</div>
         @enderror
     </div>
+
     <div class="form-group mb-3">
         <label for="slug">Slug</label>
         <input type="text" class="form-control" id="slug" name="slug" placeholder="blog-slug" value="{{$blog->slug}}"
             disabled>
     </div>
+
+    <div class="form-group mb-3">
+        <label for="uploadImage" class="form-label">Upload Image</label>
+        <img class="img-preview img-fluid mb-1 col-sm-5" @if($blog->image)
+        src="{{asset('storage/'.$blog->image)}}"
+        style="display: block;"
+        @endif
+        />
+        <input class="form-control @error('image') is-invalid @enderror" id="image" type="file" id="uploadImage"
+            name="image" onchange="previewImage()">
+        @error('image')
+        <div class="invalid-feedback">{{$message}}</div>
+        @enderror
+    </div>
+
     <div class="form-group mb-3">
         <label for="body">Body</label>
         <input id="body" type="hidden" class="@error('body') is-invalid @enderror" name="body" value="{{old('body',
@@ -49,5 +65,18 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<script>
+    function previewImage(){
+        const image = document.querySelector('#image');
+        const preview = document.querySelector('.img-preview');
+        preview.style.display = 'block';
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+        oFReader.onload = function(oFREvent){
+            preview.src = oFREvent.target.result;
+        };
+    }
+</script>
 
 @endsection

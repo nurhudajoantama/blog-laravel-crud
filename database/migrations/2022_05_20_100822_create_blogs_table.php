@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->index('title');
             $table->string('slug')->unique();
+            $table->string('image')->nullable();
             // relation to user
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

@@ -19,6 +19,9 @@
     @forelse ($blogs as $blog)
     <div class="col-md-4">
         <div class="card mb-3">
+            @if ($blog->image)
+            <img src="{{URL::asset('storage/'.$blog->image)}}" class="card-img-top" alt="{{$blog->title}}">
+            @endif
             <div class="card-body">
                 <h5 class="card-title">{{$blog->title}}</h5>
                 <p class="card-text">{!!Str::limit($blog->body, 35)!!}</p>

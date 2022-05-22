@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -33,8 +34,12 @@ class DashboardController extends Controller
         $data = $request->validate([
             'title' => 'required|min:3',
             'slug' => 'required|unique:blogs|min:3',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|file|max:2048',
             'body' => 'required|min:3',
         ]);
+        if ($request->file('image')) {
+            $data['image'] = $request->file('image')->store('blog-image', 'public');
+        }
         $data['user_id'] = auth()->id();
         Blog::create($data);
         return redirect()->route('dashboard.blog.index');
@@ -49,16 +54,26 @@ class DashboardController extends Controller
     {
         $request->validate([
             'title' => 'required|min:3',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|file|max:2048',
             // 'slug' => 'required|min:3',
             'body' => 'required|min:3',
         ]);
         $data = $request->except(['_token', '_method', 'slug']);
+        if ($request->file('image')) {
+            if ($blog->image) {
+                Storage::delete($blog->image);
+            }
+            $data['image'] =  $request->file('image')->store('blog-image', 'public');
+        }
         $blog->update($data);
         return redirect()->back()->with('success', 'Blog updated successfully');
     }
 
     public function destroyBlog(Blog $blog)
     {
+        if ($blog->image) {
+            Storage::delete($blog->image);
+        }
         $blog->delete();
         return redirect()->route('dashboard.blog.index');
     }

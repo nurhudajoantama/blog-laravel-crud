@@ -1,4 +1,4 @@
-@extends('layouts.master')
+div@extends('layouts.master')
 
 @section('title', 'Blog - '. $blog->title)
 
@@ -7,6 +7,13 @@
 <div class="mb-3">
     <h1>{{$blog->title}}</h1>
 </div>
+
+@if ($blog->image)
+<div>
+    <img src="{{URL::asset('storage/'.$blog->image)}}" class="mx-auto d-block img-fluid img-thumbnail"
+        alt="{{$blog->title}}">
+</div>
+@endif
 
 <div class="mb-2">
     <a href="{{url('blog', $blog->slug)}}">/blog/{{$blog->slug}}</a>

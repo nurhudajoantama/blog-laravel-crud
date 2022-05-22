@@ -12,6 +12,7 @@ class Blog extends Model
     protected $fillable = [
         'title',
         'slug',
+        'image',
         'body',
         'user_id',
     ];

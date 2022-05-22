@@ -5,7 +5,7 @@
 @section('dashboard')
 <h1 class="mb-5">Create Blog</h1>
 
-<form action="{{route('dashboard.blog.store')}}" method="POST">
+<form action="{{route('dashboard.blog.store')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group mb-3">
         <label for="title">Title</label>
@@ -26,8 +26,18 @@
     </div>
 
     <div class="form-group mb-3">
+        <label for="uploadImage" class="form-label">Upload Image</label>
+        <img class="img-preview img-fluid mb-1 col-sm-5" />
+        <input class="form-control @error('image') is-invalid @enderror" id="image" type="file" id="uploadImage"
+            name="image" onchange="previewImage()">
+        @error('image')
+        <div class="invalid-feedback">{{$message}}</div>
+        @enderror
+    </div>
+
+    <div class="form-group mb-3">
         <label for="body">Body</label>
-        <input id="body" type="hidden" class="@error('body') is-invalid @enderror" name="body">
+        <input id="body" type="hidden" class="@error('body') is-invalid @enderror" name="body" value="{{old('body')}}">
         <trix-editor input="body"></trix-editor>
         @error('body')
         <div class="invalid-feedback">{{$message}}</div>
@@ -36,5 +46,18 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<script>
+    function previewImage(){
+        const image = document.querySelector('#image');
+        const preview = document.querySelector('.img-preview');
+        preview.style.display = 'block';
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+        oFReader.onload = function(oFREvent){
+            preview.src = oFREvent.target.result;
+        };
+    }
+</script>
 
 @endsection
