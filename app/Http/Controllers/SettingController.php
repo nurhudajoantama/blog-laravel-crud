@@ -18,7 +18,7 @@ class SettingController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
         ]);
 
         $user = auth()->user();
