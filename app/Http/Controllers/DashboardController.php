@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
@@ -47,6 +48,9 @@ class DashboardController extends Controller
 
     public function editBlog(Blog $blog)
     {
+        if (!Gate::allows('update-post', $blog)) {
+            abort(403);
+        }
         return view('dashboard.blog.edit', compact('blog'));
     }
 
