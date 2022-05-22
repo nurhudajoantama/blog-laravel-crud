@@ -17,18 +17,26 @@
     </a>
     <h1 class="h3 mb-3 fw-normal">Register</h1>
     <div class="form-floating">
-        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="floatingInput"
+        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="floatingInputName"
             placeholder="name" value="{{old('name')}}">
-        <label for="floatingInput">Nama</label>
+        <label for="floatingInputName">Nama</label>
         @error('name')
         <div class="invalid-feedback">{{$message}}</div>
         @enderror
     </div>
     <div class="form-floating">
-        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="floatingInput"
-            placeholder="name@example.com" value="{{old('email')}}">
-        <label for="floatingInput">Email address</label>
+        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+            id="floatingInputEmail" placeholder="name@example.com" value="{{old('email')}}">
+        <label for="floatingInputEmail">Email address</label>
         @error('email')
+        <div class="invalid-feedback">{{$message}}</div>
+        @enderror
+    </div>
+    <div class="form-floating">
+        <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
+            id="floatingInputUsername" placeholder="username" value="{{old('username')}}">
+        <label for="floatingInputUsername">Username</label>
+        @error('username')
         <div class="invalid-feedback">{{$message}}</div>
         @enderror
     </div>

@@ -16,9 +16,11 @@ class SettingController extends Controller
 
     public function userSettingPost(Request $request)
     {
+        // check for email validation
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email,' . auth()->user()->id,
+            'username' => 'required|alpha_dash|unique:users,username,' . auth()->user()->id,
         ]);
 
         $user = auth()->user();

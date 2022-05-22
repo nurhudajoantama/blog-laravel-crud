@@ -30,6 +30,14 @@
             <div class="invalid-feedback">{{$message}}</div>
             @enderror
         </div>
+        <div class="form-group mb-3">
+            <label for="username">username</label>
+            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
+                name="username" placeholder="username" value="{{old('username', $user->username)}}">
+            @error('username')
+            <div class="invalid-feedback">{{$message}}</div>
+            @enderror
+        </div>
 
         <button type="submit" class="btn btn-success">Save</button>
     </form>
