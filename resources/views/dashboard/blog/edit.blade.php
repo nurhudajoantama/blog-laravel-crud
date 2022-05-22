@@ -30,8 +30,9 @@
     </div>
     <div class="form-group mb-3">
         <label for="body">Body</label>
-        <textarea class="form-control @error('body') is-invalid @enderror" id="body" name="body" rows="5">{{old('body',
-            $blog->body)}}</textarea>
+        <input id="body" type="hidden" class="@error('body') is-invalid @enderror" name="body" value="{{old('body',
+        $blog->body)}}">
+        <trix-editor input="body"></trix-editor>
         @error('body')
         <div class="invalid-feedback">{{$message}}</div>
         @enderror

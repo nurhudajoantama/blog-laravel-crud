@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{URL::asset('css/bootstrap.min.css')}}">
     <title>@yield('title')</title>
 
+    @yield('head')
+
 </head>
 
 <body>
