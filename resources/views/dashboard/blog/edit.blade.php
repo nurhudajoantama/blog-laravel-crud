@@ -1,9 +1,9 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Create Blog')
+@section('title', 'Edit Blog')
 
 @section('dashboard')
-<h1 class="mb-5">Create Blog</h1>
+<h1 class="mb-5">Edit Blog</h1>
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success alert-block" role="alert">
@@ -63,20 +63,6 @@
             <strong>{{$blog->updated_at->format('d M Y')}}</strong>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Save</button>
 </form>
-
-<script>
-    function previewImage(){
-        const image = document.querySelector('#image');
-        const preview = document.querySelector('.img-preview');
-        preview.style.display = 'block';
-        const oFReader = new FileReader();
-        oFReader.readAsDataURL(image.files[0]);
-        oFReader.onload = function(oFREvent){
-            preview.src = oFREvent.target.result;
-        };
-    }
-</script>
-
 @endsection

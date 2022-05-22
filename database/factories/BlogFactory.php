@@ -23,7 +23,7 @@ class BlogFactory extends Factory
             'title' => $title,
             'slug' => $slug,
             'body' => $this->faker->paragraph,
-            'image' => 'blog-image/default.jpg',
+            'image' => null,
             'user_id' => 1,
         ];
     }

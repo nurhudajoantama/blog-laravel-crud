@@ -14,7 +14,7 @@ class UserController extends Controller
         // $blogs = Blog::with('user')->whereHas('user', function ($query) use ($username) {
         //     $query->where('username', $username);
         // })->paginate(10);
-        $blogs = $user->blogs()->paginate(10);
+        $blogs = $user->blogs()->latest()->paginate(10);
         return view('user.show', compact('user', 'blogs'));
     }
 }

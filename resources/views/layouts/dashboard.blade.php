@@ -31,6 +31,17 @@
     document.addEventListener('trix-file-accept', function(event) {
         e.preventDefault();
     });
+
+    function previewImage(){
+        const image = document.querySelector('#image');
+        const preview = document.querySelector('.img-preview');
+        preview.style.display = 'block';
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+        oFReader.onload = function(oFREvent){
+            preview.src = oFREvent.target.result;
+        };
+    }
 </script>
 
 @endsection

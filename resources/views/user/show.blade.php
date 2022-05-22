@@ -17,11 +17,11 @@
     <div class="col-md-4">
         <div class="card mb-3">
             @if ($blog->image)
-            <img src="{{URL::asset('storage/'.$blog->image)}}" class="card-img-top" alt="{{$blog->title}}">
+            <img src="{{asset('storage/'.$blog->image)}}" class="card-img-top" alt="{{$blog->title}}">
             @endif
             <div class="card-body">
                 <h5 class="card-title">{{$blog->title}}</h5>
-                <p class="card-text">{!!Str::limit($blog->body, 35)!!}</p>
+                <p class="card-text">{!!Str::limit(strip_tags($blog->body, 35))!!}</p>
                 <a href="{{route('blog.show', ['blog' => $blog->slug])}}" class="btn btn-primary">Read More</a>
             </div>
             <div class="card-footer text-muted">
