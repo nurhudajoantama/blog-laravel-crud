@@ -17,7 +17,7 @@
 </div>
 @endif
 
-<form action="{{route('dashboard.blog.update', ['slug' => $blog->slug])}}" method="POST">
+<form action="{{route('dashboard.blog.update', ['blog' => $blog->slug])}}" method="POST">
     @csrf
     @method('put')
 

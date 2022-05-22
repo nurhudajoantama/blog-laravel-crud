@@ -23,12 +23,6 @@ class DashboardController extends Controller
         return view('dashboard.blog.index', compact('blogs'));
     }
 
-    public function showBlog($slug)
-    {
-        $blog = Blog::where('slug', $slug)->firstOrFail();
-        return view('dashboard.blog.show', compact('blog'));
-    }
-
     public function createBlog()
     {
         return view('dashboard.blog.create');
@@ -46,13 +40,12 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.blog.index');
     }
 
-    public function editBlog($slug)
+    public function editBlog(Blog $blog)
     {
-        $blog = Blog::where('slug', $slug)->firstOrFail();
         return view('dashboard.blog.edit', compact('blog'));
     }
 
-    public function updateBlog(Request $request, $slug)
+    public function updateBlog(Request $request, Blog $blog)
     {
         $request->validate([
             'title' => 'required|min:3',
@@ -60,15 +53,13 @@ class DashboardController extends Controller
             'body' => 'required|min:3',
         ]);
         $data = $request->except(['_token', '_method', 'slug']);
-        Blog::where('slug', $slug)->update($data);
-        return redirect()->route('dashboard.blog.edit', [
-            'slug' => $slug
-        ])->with('success', 'Blog updated successfully');
+        $blog->update($data);
+        return redirect()->back()->with('success', 'Blog updated successfully');
     }
 
-    public function destroyBlog($slug)
+    public function destroyBlog(Blog $blog)
     {
-        Blog::where('slug', $slug)->delete();
+        $blog->delete();
         return redirect()->route('dashboard.blog.index');
     }
 }

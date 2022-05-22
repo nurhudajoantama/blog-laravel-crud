@@ -15,7 +15,7 @@
 <div>
     <p>
         Dibuat oleh
-        <a href="{{route('user.show',['username'=>$blog->user->username])}}"><strong>{{$blog->user->name}}</strong></a>
+        <a href="{{route('user.show',['user'=>$blog->user->username])}}"><strong>{{$blog->user->name}}</strong></a>
     </p>
     <p>
         Terakhir diperbarui pada

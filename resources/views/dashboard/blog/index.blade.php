@@ -52,7 +52,7 @@
                 {{$blog->title}}
             </td>
             <td>
-                <a href="{{route('blog.show', ['slug' => $blog->slug])}}" class="blog-title">
+                <a href="{{route('blog.show', ['blog' => $blog->slug])}}" class="blog-title">
                     {{$blog->slug}}
                 </a>
             </td>
@@ -63,7 +63,7 @@
                 {{$blog->updated_at}}
             </td>
             <td>
-                <a href="{{route('dashboard.blog.edit', ['slug' => $blog->slug])}}" class="btn btn-success btn-sm">
+                <a href="{{route('dashboard.blog.edit', ['blog' => $blog->slug])}}" class="btn btn-success btn-sm">
                     Edit
                 </a>
 
@@ -88,7 +88,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{route('dashboard.blog.destroy', ['slug' => $blog->slug])}}"
+                                <form action="{{route('dashboard.blog.destroy', ['blog' => $blog->slug])}}"
                                     method="POST">
                                     @csrf
                                     @method('delete')

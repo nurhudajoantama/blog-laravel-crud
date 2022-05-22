@@ -21,9 +21,9 @@ class BlogController extends Controller
         return view('blog.index', compact('blogs'));
     }
 
-    function show($slug)
+    function show(Blog $blog)
     {
-        $blog = Blog::where('slug', $slug)->firstOrFail();
+        $blog = $blog->load('user');
         return view('blog.show', compact('blog'));
     }
 }
