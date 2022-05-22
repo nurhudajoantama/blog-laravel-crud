@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -52,7 +53,9 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-
+Route::prefix('/user')->group(function () {
+    Route::get('/{username}', [UserController::class, 'show'])->name('user.show');
+});
 
 Route::prefix('/blog')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('blog.index');
