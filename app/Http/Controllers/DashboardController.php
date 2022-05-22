@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -32,9 +33,10 @@ class DashboardController extends Controller
 
     public function storeBlog(Request $request)
     {
+        $request->merge(['slug' => Str::slug($request->slug)]);
         $data = $request->validate([
             'title' => 'required|min:3',
-            'slug' => 'required|unique:blogs|min:3',
+            'slug' => 'required|min:3|unique:blogs',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|file|max:2048',
             'body' => 'required|min:3',
         ]);
@@ -48,7 +50,7 @@ class DashboardController extends Controller
 
     public function editBlog(Blog $blog)
     {
-        if (!Gate::allows('update-post', $blog)) {
+        if (!Gate::allows('update-blog', $blog)) {
             abort(403);
         }
         return view('dashboard.blog.edit', compact('blog'));
@@ -56,13 +58,14 @@ class DashboardController extends Controller
 
     public function updateBlog(Request $request, Blog $blog)
     {
+        $request->merge(['slug' => Str::slug($request->slug)]);
         $request->validate([
             'title' => 'required|min:3',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|file|max:2048',
-            // 'slug' => 'required|min:3',
+            'slug' => 'required|min:3|unique:blogs,slug,' . $blog->id,
             'body' => 'required|min:3',
         ]);
-        $data = $request->except(['_token', '_method', 'slug']);
+        $data = $request->except(['_token', '_method']);
         if ($request->file('image')) {
             if ($blog->image) {
                 Storage::delete($blog->image);
@@ -70,7 +73,7 @@ class DashboardController extends Controller
             $data['image'] =  $request->file('image')->store('blog-image', 'public');
         }
         $blog->update($data);
-        return redirect()->back()->with('success', 'Blog updated successfully');
+        return redirect()->route('dashboard.blog.edit', ['blog' => $blog])->with('success', 'Blog updated successfully');
     }
 
     public function destroyBlog(Blog $blog)

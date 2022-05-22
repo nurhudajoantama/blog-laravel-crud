@@ -26,8 +26,11 @@
 
     <div class="form-group mb-3">
         <label for="slug">Slug</label>
-        <input type="text" class="form-control" id="slug" name="slug" placeholder="blog-slug" value="{{$blog->slug}}"
-            disabled>
+        <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug"
+            placeholder="blog-slug" value="{{$blog->slug}}">
+        @error('slug')
+        <div class="invalid-feedback">{{$message}}</div>
+        @enderror
     </div>
 
     <div class="form-group mb-3">
