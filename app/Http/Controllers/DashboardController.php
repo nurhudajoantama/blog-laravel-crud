@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $search = $request->get('search');
         $blogs = Blog::where('title', 'like', '%' . $search . '%')
             ->where('user_id', auth()->user()->id)
-            ->orderBy('updated_at', 'desc')
+            ->latest()
             ->paginate(20)
             ->appends($request->query());
         return view('dashboard.blog.index', compact('blogs'));

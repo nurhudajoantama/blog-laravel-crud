@@ -15,7 +15,7 @@ class BlogController extends Controller
             ->orWhereHas('user', function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->paginate(20)
             ->appends($request->query());
         return view('blog.index', compact('blogs'));
